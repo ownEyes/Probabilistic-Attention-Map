@@ -1,0 +1,71 @@
+# network architecture
+arch: resnet110
+# attention type in building block 
+# (possible choices none | se | cbam | simam | pdfam_gau | pdfam_gmm | lap_spatial_only |lap_spatial_param )
+# (ablation study: lap_ablation_no_adjust | lap_ablation_no_scale | lap_ablation_no_width)
+# (ablation study: lap_ablation_only_adjust | lap_ablation_only_scale | lap_ablation_only_width)
+# lap_ablation_none
+attention_type: cbam
+# mainly used for training 5 times
+other_mark: Trial01
+# attention parameter (reduction in CBAM and SE, e_lambda in simam, num_T in pdfam_gmm) 
+# se:r = 16, cbam:r = 16, simam:lambda = 0.0001
+attention_param: 16
+# attention parameter2 (num_K in pdfam_gmm)
+attention_param2: 2
+# training dataset
+dataset: cifar10
+# dataset path
+dataset_dir: ../datasets/CIFAR/
+# whether to split training and validation
+validation: true
+# number of validation samples
+val_size: 5000
+# number of data loading works
+workers: 16
+# gpus to use, e.g. 0-3 or 0,1,2,3
+gpu_ids: "0"
+# batch size for training and validation
+batch_size: 128
+# number of epochs to train
+num_epoch: 182
+# epoch to start saving best model
+start_validation_epoch: 0
+# whether to resume training from existing
+resume: false
+# optimizer
+optim: SGD
+# learning rate
+base_lr: 0.1
+# num of epoch to start lr decay
+lr_decay_start: 91
+# num of epoch to stop lr decay
+lr_decay_end: 136
+# momentum for sgd, beta1 for adam
+beta1: 0.9
+# beta2 for adam
+beta2: 0.8
+# SGD weight decay
+weight_decay: 0.0001
+# warmup for deeper network
+warmup: true
+# wider resnet for training
+wrn: false
+# random seed
+seed: 1
+# frequence to display training status
+disp_iter: 100
+# folder to output checkpoints
+ckpt_path: ../checkpoints/
+# folder to output logs
+log_path: ../logs/
+# whether to use tensorboard logging
+tensorboard_logging: false
+# folder to output tensorboardX events
+tensorboard_path: ../tensorboard/
+# whether to use mlflow logging
+mlflow_logging: true
+# folder to output mlflow logs
+mlflow_path: ../mlflow/
+# experiment name for mlflow logging
+experiment: cifar10-resnet110-cbam
